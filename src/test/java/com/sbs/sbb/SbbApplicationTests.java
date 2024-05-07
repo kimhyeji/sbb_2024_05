@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -38,7 +40,11 @@ class SbbApplicationTests {
 //            assertEquals("sbb가 무엇인가요?", q.getSubject());
 //        }
 
-        Question q = this.questionRepository.findBySubject("sbb가 무엇인가요?");
+//        Question q = this.questionRepository.findBySubject("sbb가 무엇인가요?");
+//        assertEquals(1, q.getId());
+
+        Question q = this.questionRepository.findBySubjectAndContent(
+                "sbb가 무엇인가요?", "sbb에 대해서 알고 싶습니다.");
         assertEquals(1, q.getId());
     }
 }
