@@ -1,8 +1,10 @@
 package com.sbs.sbb.Question;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 @RequestMapping("/question")
 @Controller
 @RequiredArgsConstructor
+//@Validated 컨트롤러에서는 이 부분 생략가능
 public class QuestionController {
     private final QuestionService questionService;
 
@@ -36,11 +39,9 @@ public class QuestionController {
     }
 
     @PostMapping("/create")
-    public String questionCreate(QuestionForm questionForm) {
-        String subject = questionForm.getSubject();
-        String content = questionForm.getSubject();
-
-        Question q = this.questionService.create(subject, content);
+    // QuestionForm 값을 바인딩 할 때 유효성 체크를 해라!
+    public String questionCreate(@Valid QuestionForm questionForm) {
+        Question q = this.questionService.create(questionForm.getSubject(), questionForm.getSubject());
 
         return "redirect:/question/list";
     }
