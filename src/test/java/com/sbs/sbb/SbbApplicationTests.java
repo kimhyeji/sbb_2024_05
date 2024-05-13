@@ -29,7 +29,6 @@ class SbbApplicationTests {
     private QuestionService questionService;
     @Autowired
     private UserService userService;
-
     @Autowired
     private QuestionRepository questionRepository;
     @Autowired
