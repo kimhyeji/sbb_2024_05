@@ -21,11 +21,11 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
 
     public List<Question> getList() {
-        return this.questionRepository.findAll();
+        return questionRepository.findAll();
     }
 
     public Question getQuestion(Integer id) {
-        Optional<Question> oq = this.questionRepository.findById(id);
+        Optional<Question> oq = questionRepository.findById(id);
 
         // oq.isPersent() == false
         // !oq.isPresent()
@@ -42,7 +42,8 @@ public class QuestionService {
         q.setAuthor(user);
         q.setCreateDate(LocalDateTime.now());
 
-        this.questionRepository.save(q);
+        questionRepository.save(q);
+
         return q;
     }
 
@@ -63,5 +64,11 @@ public class QuestionService {
 
     public void delete(Question question) {
         questionRepository.delete(question);
+    }
+
+    public void vote(Question question, SiteUser voter) {
+        question.addVoter(voter);
+
+        questionRepository.save(question);
     }
 }
